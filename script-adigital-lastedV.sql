@@ -47,12 +47,12 @@ create table cliente (
 );
 
 create table fornecedor (
-	CodigoF int not null primary key,
-	Nome varchar(255),
-	Telefone varchar(255),
-	Email varchar(255),
-	Cnpj varchar(14),
-	Data_cad_forn timestamp,
+	codigo_f int not null primary key,
+	nome varchar(255),
+	telefone varchar(255),
+	email varchar(255),
+	cnpj varchar(14),
+	data_cad_forn timestamp,
   rua varchar(255),
   numero int,
   bairro varchar(255),
@@ -62,64 +62,64 @@ create table fornecedor (
 );
 
 create table produto (
-	CodigoP int not null primary key,
-	Nome varchar(255), 
-	Categoria varchar(25),
-	Quantidade int,
-	Qtd_perdida int,
-	Preco_venda decimal,
+	codigo_p int not null primary key,
+	nome varchar(255), 
+	categoria varchar(25),
+	quantidade int,
+	qtd_perdida int,
+	preco_venda decimal,
 	preco_compra decimal,
-	Data_cad_prod timestamp,
-	Cod_relatorio int not null,
-	foreign key(Cod_relatorio) references relatorio(CodigoR)
+	data_cad_prod timestamp,
+	cod_relatorio int not null,
+	foreign key(cod_relatorio) references relatorio(codigo_r)
 );
 
 create table fornecimento (
-	CodigoFt int not null primary key,
-	Cod_fornecedor int not null,
-	Cod_produto int not null,
-	foreign key(Cod_fornecedor) references fornecedor(CodigoF),
-	foreign key(Cod_produto) references produto(CodigoP)
+	codigo_ft int not null primary key,
+	cod_fornecedor int not null,
+	cod_produto int not null,
+	foreign key(cod_fornecedor) references fornecedor(codigo_f),
+	foreign key(cod_produto) references produto(codigo_p)
 );
 
 create table item_produto (
-	CodigoI int not null primary key,
-	Qtd_item int,
-	Cod_produto int not null,
-	foreign key(Cod_produto) references produto(CodigoP)
+	codigo_i int not null primary key,
+	qtd_item int,
+	cod_produto int not null,
+	foreign key(cod_produto) references produto(codigo_p)
 );
 
 create table comprovante (
-	CodigoCp int not null primary key,
-	Nome varchar(255),
-	Cpf varchar(11),
-	Cnpj varchar(14),
-	Telefone varchar(255),
-	Data_emissao timestamp 
+	codigo_cp int not null primary key,
+	nome varchar(255),
+	cpf varchar(11),
+	cnpj varchar(14),
+	telefone varchar(255),
+	data_emissao timestamp 
 );
 
 create table venda (
-	CodigoV int not null primary key,
-	Total_venda decimal,
-	Data_venda timestamp,
-	Cod_item int not null,
-	Cod_cliente int not null,
-	Cod_usuario int not null,
-	Cod_comprovante int not null,
-	foreign key(Cod_item) references item_produto(CodigoI),
-	foreign key(Cod_cliente) references cliente(CodigoC),
-	foreign key(Cod_usuario) references usuario(CodigoU),
-	foreign key(Cod_comprovante) references comprovante(CodigoCp)
+	codigo_v int not null primary key,
+	total_venda decimal,
+	data_venda timestamp,
+	cod_item int not null,
+	cod_cliente int not null,
+	cod_usuario int not null,
+	cod_comprovante int not null,
+	foreign key(cod_item) references item_produto(codigo_i),
+	foreign key(cod_cliente) references cliente(codigo_c),
+	foreign key(cod_usuario) references usuario(codigo_u),
+	foreign key(cod_comprovante) references comprovante(codigo_cp)
 );
 
 create table despesas (
-	CodigoD int not null primary key,
-	Nome varchar(255),
-	Descricao varchar(255),
-	Categoria varchar(25),
-	Valor decimal,
-	Data_venc date,
-	Data_pag date
+	codigo_d int not null primary key,
+	nome varchar(255),
+	descricao varchar(255),
+	categoria varchar(25),
+	valor decimal,
+	data_venc date,
+	data_pag date
 );
 
 commit;
