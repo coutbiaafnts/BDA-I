@@ -17,7 +17,6 @@ create table usuario (
   estado varchar(255),
   cep varchar(8)
 );
-
 -- criando os dados para a tabela de usuário
 INSERT INTO usuario (nome, email, senha, cpf, cargo, data_nasc, data_cad_usuario, salario, rua, numero, bairro, cidade, estado, cep)
 VALUES 
@@ -41,6 +40,13 @@ create table relatorio (
 	cod_usuario int not null,
 	foreign key(cod_usuario) references usuario(codigo_u)
 );
+-- criando dados para a tabela de relatórios
+INSERT INTO relatorio (prod_men_vend, prod_mais_vend, prod_falta, prod_baixo_estq, cod_usuario)
+VALUES
+('Cadeira Gamer', 'Smartphone Samsung', 'Notebook Dell', 'Mesa Escritório', 1),
+('Mesa Escritório', 'Geladeira Brastemp', 'Cadeira Gamer', 'Notebook Dell', 2),
+('Geladeira Brastemp', 'Notebook Dell', 'Smartphone Samsung', 'Cadeira Gamer', 3);
+
 
 create table cliente (
 	codigo_c serial not null primary key,
@@ -59,7 +65,6 @@ create table cliente (
   estado varchar(255),
   cep varchar(8)
 );
-
 -- criando os dados para a tabela de clientes
 INSERT INTO cliente (nome, cnpj, cpf, telefone, email, frequencia, desconto, data_cad_cli, rua, numero, bairro, cidade, estado, cep)
 VALUES 
@@ -88,7 +93,6 @@ create table fornecedor (
   estado varchar(255),
   cep varchar(8)
 );
-
 -- criando os dados para a tabela de fornecedores
 INSERT INTO fornecedor (nome, telefone, email, cnpj, data_cad_forn, rua, numero, bairro, cidade, estado, cep)
 VALUES 
@@ -115,7 +119,14 @@ create table produto (
 	cod_relatorio int not null,
 	foreign key(cod_relatorio) references relatorio(codigo_r)
 );
-
+-- criando dados para a tabela de produtos
+INSERT INTO produto (nome, categoria, quantidade, qtd_perdida, preco_venda, preco_compra, data_cad_prod, cod_relatorio)
+VALUES
+('Notebook Dell', 'Eletrônicos', 50, 2, 3500.00, 3000.00, '2024-05-09 13:27:00', 1),
+('Cadeira Gamer', 'Móveis', 30, 1, 800.00, 600.00, '2024-05-09 13:27:00', 2),
+('Smartphone Samsung', 'Eletrônicos', 100, 5, 2500.00, 2000.00, '2024-05-09 13:27:00', 1),
+('Mesa Escritório', 'Móveis', 20, 0, 450.00, 300.00, '2024-05-09 13:27:00', 2),
+('Geladeira Brastemp', 'Eletrodomésticos', 10, 0, 3200.00, 2800.00, '2024-05-09 13:27:00', 3);
 
 create table fornecimento (
 	codigo_ft serial not null primary key,
@@ -124,6 +135,14 @@ create table fornecimento (
 	foreign key(cod_fornecedor) references fornecedor(codigo_f),
 	foreign key(cod_produto) references produto(codigo_p)
 );
+-- criando dados para a tabela de fornecimentos
+INSERT INTO fornecimento (cod_fornecedor, cod_produto)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
 
 create table item_produto (
 	codigo_i serial not null primary key,
@@ -131,6 +150,14 @@ create table item_produto (
 	cod_produto int not null,
 	foreign key(cod_produto) references produto(codigo_p)
 );
+-- criando dados para a tabela de item_produto
+INSERT INTO item_produto (qtd_item, cod_produto)
+VALUES
+(10, 1),
+(5, 2),
+(20, 3),
+(15, 4),
+(8, 5);
 
 create table comprovante (
 	codigo_cp serial not null primary key,
@@ -140,6 +167,13 @@ create table comprovante (
 	telefone varchar(255),
 	data_emissao timestamp 
 );
+-- criando dados para a tabela de comprovantes
+INSERT INTO comprovante (nome, cpf, cnpj, telefone, data_emissao)
+VALUES
+('João Silva', '12345678901', NULL, '31987654321', '2024-09-05 09:00:00'),
+('Empresa Alpha', NULL, '12345678000199', '31987654322', '2024-09-05 09:30:00'),
+('Maria Oliveira', '34567890123', NULL, '31998765432', '2024-09-05 10:00:00');
+
 
 create table venda (
 	codigo_v serial not null primary key,
@@ -154,6 +188,12 @@ create table venda (
 	foreign key(cod_usuario) references usuario(codigo_u),
 	foreign key(cod_comprovante) references comprovante(codigo_cp)
 );
+-- criando dados ara a tabela de vendas
+INSERT INTO venda (total_venda, data_venda, cod_item, cod_cliente, cod_usuario, cod_comprovante)
+VALUES
+(3500.00, '2024-09-05 11:00:00', 1, 1, 1, 1),
+(800.00, '2024-09-05 11:30:00', 2, 2, 2, 2),
+(2500.00, '2024-09-05 12:00:00', 3, 3, 3, 3);
 
 create table despesas (
 	codigo_d serial not null primary key,
@@ -164,5 +204,13 @@ create table despesas (
 	data_venc date,
 	data_pag date
 );
+-- criando dados para a tabela de despesas
+INSERT INTO despesas (nome, descricao, categoria, valor, data_venc, data_pag)
+VALUES
+('Aluguel', 'Pagamento mensal do aluguel do escritório', 'Fixa', 2500.00, '2024-05-10', '2024-05-09'),
+('Internet', 'Serviço de internet empresarial', 'Fixa', 200.00, '2024-05-15', '2024-05-14'),
+('Material de Escritório', 'Compra de papel e canetas', 'Variável', 150.00, '2024-05-20', '2024-05-19'),
+('Conta de Luz', 'Energia elétrica do escritório', 'Fixa', 300.00, '2024-05-25', '2024-05-24'),
+('Marketing', 'Campanha de anúncios online', 'Variável', 500.00, '2024-05-30', NULL);
 
 commit;
