@@ -1,4 +1,5 @@
-INSERT INTO fornecedor (
+INSERT INTO
+  fornecedor (
     nome,
     telefone,
     email,
@@ -10,8 +11,9 @@ INSERT INTO fornecedor (
     estado,
     cep,
     data_cad_forn
-)
-VALUES (
+  )
+VALUES
+  (
     'ABC Distribuidora',
     '1133334444',
     'contato@abcdistribuidora.com',
@@ -23,7 +25,8 @@ VALUES (
     'SP',
     '01002-000',
     '2024-06-09 21:37'
-  ), (
+  ),
+  (
     'XYZ Fornecimentos',
     '2133335555',
     'contato@xyzfornecimentos.com',
@@ -35,7 +38,8 @@ VALUES (
     'RJ',
     '20002-000',
     '2024-06-09 21:37'
-  ), (
+  ),
+  (
     'LMN Suprimentos',
     '3133336666',
     'contato@lmnsuprimentos.com',

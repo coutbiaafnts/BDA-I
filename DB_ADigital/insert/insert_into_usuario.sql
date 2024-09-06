@@ -1,4 +1,5 @@
-INSERT INTO usuario (
+INSERT INTO
+  usuario (
     nome,
     email,
     senha,
@@ -13,8 +14,9 @@ INSERT INTO usuario (
     estado,
     cep,
     data_cad_us
-)
-VALUES (
+  )
+VALUES
+  (
     'Carlos Silva',
     'carlos.silva@example.com',
     'senha123',
@@ -29,7 +31,8 @@ VALUES (
     'SP',
     '01000-000',
     '2024-06-09 21:37'
-  ), (
+  ),
+  (
     'Ana Souza',
     'ana.souza@example.com',
     'senha456',
@@ -44,7 +47,8 @@ VALUES (
     'RJ',
     '20000-000',
     '2024-06-09 21:37'
-  ), (
+  ),
+  (
     'Pedro Oliveira',
     'pedro.oliveira@example.com',
     'senha789',

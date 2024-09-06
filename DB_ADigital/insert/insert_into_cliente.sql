@@ -1,4 +1,5 @@
-INSERT INTO cliente (
+INSERT INTO
+  cliente (
     nome,
     cpf,
     cnpj,
@@ -11,8 +12,9 @@ INSERT INTO cliente (
     estado,
     cep,
     data_cad_cli
-)
-VALUES (
+  )
+VALUES
+  (
     'Maria Fernandes',
     '12345678901',
     NULL,
@@ -25,7 +27,8 @@ VALUES (
     'SP',
     '01001-000',
     '2024-06-09 21:37'
-  ), (
+  ),
+  (
     'Empresa XYZ',
     NULL,
     '23456789000185',
@@ -38,7 +41,8 @@ VALUES (
     'RJ',
     '20001-000',
     '2024-06-09 21:37'
-  ), (
+  ),
+  (
     'Paula Castro',
     '34567890123',
     NULL,
