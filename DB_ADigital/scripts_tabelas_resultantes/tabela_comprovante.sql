@@ -1,24 +1,26 @@
 SELECT
-  cli.nome as nome_cliente,
-  cli.cpf as cpf_cliente,
-  cli.cnpj as cnpj_cliente,
-  cli.telefone as telefone_cliente,
-  prod.nome as nome_produto,
-  prod.codigo_p as id_produto,
-  prod.preco_venda as valor_produto,
-  item.qtd_item as quantidade_produto,
-  SUM(prod.preco_venda * item.qtd_item) as total_venda
+  cliente.nome as nome_cliente,
+  cliente.cpf as cpf_cliente,
+  cliente.cnpj as cnpj_cliente,
+  cliente.telefone as telefone_cliente,
+  item_venda.id_produto as id_produto,
+  produto.nome as produto,
+  item_venda.quantidade as quantidade_produto,
+  produto.preco_venda as valor_item,
+  SUM(produto.preco_venda * item_venda.quantidade) as valor_total,
+  SUM(valor_total) as valor_compra
 FROM
-  venda as vend
-  JOIN comprovante as comp ON comp.codigo_cp = vend.cod_comprovante
-  JOIN item_produto as item ON vend.cod_item = item.codigo_i
-  JOIN cliente as cli ON vend.cod_cliente = cli.codigo_c
-  JOIN produto as prod ON item.cod_produto = prod.codigo_p
+  venda
+  JOIN comprovante ON comprovante.id_comprovante = venda.id_comprovante
+  JOIN item_venda ON venda.ID_item = item_venda.id_item
+  JOIN cliente ON venda.id_cliente = cliente.id_cliente
+  JOIN produto ON item_venda.id_produto = produto.id_produto
 GROUP BY
-  cli.nome,
-  cli.cpf,
-  cli.cnpj,
-  cli.telefone,
-  prod.nome,
-  prod.preco_venda,
-  item.qtd_item;
+  cliente.nome,
+  cliente.cpf,
+  cliente.cnpj,
+  cliente.telefone,
+  item_venda.id_produto,
+  produto.nome,
+  item_venda.quantidade,
+  produto.preco_venda;
