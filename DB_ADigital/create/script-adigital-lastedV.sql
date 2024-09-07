@@ -84,6 +84,7 @@ create table relatorio_estq (
 	id_relatorio_estq serial not null primary key,
 	id_produto int,
 	id_usuario int,
+	nome_usuario varchar(255),
 	prod_men_vend varchar(255),
 	prod_mais_vend varchar(255),
 	prod_falta varchar(255),
@@ -104,7 +105,8 @@ create table comprovante (
 	produto varchar(255), -- puxa da coluna nome da tabela produto
 	quantidade int, -- puxa da coluna quantidade da tabela item_venda
 	valor_item decimal(10,2), -- puxa da coluna preco_venda da tabela produto
-	valor_total decimal(10,2), -- puxa da coluna total da tabela venda
+	valor_total decimal(10,2), -- valor total de cada item
+	valor_compra decimal(10,2), -- soma dos valores totais
 	forma_pagamento varchar(255), -- puxa da coluna forma_pagamento da tabela venda
 	data_emissao timestamp
 );
@@ -135,7 +137,7 @@ create table venda (
 	id_usuario int,
 	id_cliente int,
 	id_comprovante int,
-	total decimal(10,2), -- alimentado pela multiplicação do preco_venda da tabela produto pela quantidade de itens em item_venda
+	total decimal(10,2), 
 	forma_pagamento varchar(255), -- dinheiro, pix, crédito e débito
 	data_venda timestamp,
 	foreign key(id_item) references item_venda(id_item),
