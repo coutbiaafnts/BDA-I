@@ -40,7 +40,7 @@ create table cliente_frequente (
 	id_cliente int,
 	nome varchar(255),
 	qtd_frequencia int,
-	desconto int,
+	desconto decimal(10,2),
 	foreign key(id_cliente) references cliente(id_cliente)
 );
 
